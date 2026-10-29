@@ -1,5 +1,5 @@
 import './style.css';
-import { supabase, configured } from './supabase.js';
+import { supabase, configured, configError } from './supabase.js';
 import { TOPICS } from '../shared/topics.js';
 import { initCart } from './cart.js';
 
@@ -200,7 +200,10 @@ async function init() {
   loadHero();
   cart = initCart({ supabase, getSession: () => session, openAuth, toast, esc, fetchImages });
   cart.renderProducts();
-  if (!configured) { $('envWarn').hidden = false; renderAuth(); return; }
+  if (!configured) {
+    if (configError) $('envWarn').textContent = '⚠️ ' + configError;
+    $('envWarn').hidden = false; renderAuth(); return;
+  }
   const { data } = await supabase.auth.getSession();
   session = data.session; renderAuth();
   supabase.auth.onAuthStateChange((_event, s) => { session = s; renderAuth(); });
