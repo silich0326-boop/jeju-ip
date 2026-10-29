@@ -150,3 +150,5 @@ label input:focus, #searchForm input:focus { outline: 2px solid var(--orange); b
 .setup-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
 kbd { background: #eee; border: 1px solid #ccc; border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; font-size: 12px; }
 @media (max-width: 480px) { .row { grid-template-columns: 44px 1fr auto auto; } .sub { display: none; } .rthumb { width: 44px; height: 44px; } }
+
+#errBar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; background: #c0392b; color: #fff; padding: 10px 16px; font-size: 13px; word-break: break-all; }
