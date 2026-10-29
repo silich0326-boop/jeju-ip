@@ -14,9 +14,11 @@
     <a class="brand" href="#top">🍊 제주 로컬 IP</a>
     <nav>
       <a href="#ip">로컬 IP</a>
+      <a href="#shop">상품</a>
       <a href="#search">사진 검색</a>
     </nav>
     <div class="auth-area">
+      <button id="cartBtn" class="btn cart-btn" aria-label="장바구니">🛒 <span id="cartCount" hidden>0</span></button>
       <span id="userEmail" hidden></span>
       <button id="authBtn" class="btn">로그인 / 회원가입</button>
     </div>
@@ -35,6 +37,11 @@
     <section id="ip" class="wrap">
       <h2>제주 로컬 IP 소개</h2>
       <div id="cards" class="cards"></div>
+    </section>
+
+    <section id="shop" class="wrap">
+      <h2>🛍️ 제주 로컬 상품 <small>(연습용 가상 상품 · 결제 없음)</small></h2>
+      <div id="products" class="cards"></div>
     </section>
 
     <section id="search" class="wrap">
@@ -79,6 +86,29 @@
       <p id="authMsg" class="msg" role="alert"></p>
       <button id="authSubmit" class="btn primary wide" type="submit">로그인</button>
     </form>
+  </dialog>
+
+  <dialog id="cartDialog">
+    <div class="cart">
+      <button type="button" class="close" id="cartClose" aria-label="닫기">✕</button>
+      <h2>🛒 장바구니</h2>
+      <div id="cartSetup" hidden>
+        <p>⚙️ <b>cart_items 테이블이 아직 없어요.</b> 아래 SQL을 복사해서 Supabase <b>SQL Editor</b>에 붙여 넣고
+          <kbd>Ctrl</kbd> + <kbd>Enter</kbd> 로 실행하세요.</p>
+        <textarea id="cartSql" readonly rows="8" spellcheck="false"></textarea>
+        <div class="setup-btns">
+          <button type="button" id="sqlCopy" class="btn">SQL 복사</button>
+          <a id="sqlOpen" class="btn primary" target="_blank" rel="noopener">SQL Editor 열기</a>
+          <button type="button" id="cartRetry" class="btn">실행했어요, 다시 확인</button>
+        </div>
+      </div>
+      <div id="cartBody"></div>
+      <div id="cartFoot" hidden>
+        <div class="total">합계 <b id="cartTotal">0원</b></div>
+        <button type="button" id="cartClear" class="btn">비우기</button>
+      </div>
+      <p class="note">연습용 사이트예요. 실제 결제는 되지 않아요.</p>
+    </div>
   </dialog>
 
   <dialog id="lightbox">

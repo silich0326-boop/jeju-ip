@@ -1,7 +1,9 @@
 import './style.css';
 import { supabase, configured } from './supabase.js';
 import { TOPICS } from '../shared/topics.js';
+import { initCart } from './cart.js';
 
+let cart;
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -189,12 +191,15 @@ function renderAuth() {
   $('userEmail').textContent = email || '';
   $('authBtn').textContent = session ? '로그아웃' : '로그인 / 회원가입';
   applyLock();
+  cart?.refresh();
 }
 
 /* ---------- 시작 ---------- */
 async function init() {
   renderCards();
   loadHero();
+  cart = initCart({ supabase, getSession: () => session, openAuth, toast, esc, fetchImages });
+  cart.renderProducts();
   if (!configured) { $('envWarn').hidden = false; renderAuth(); return; }
   const { data } = await supabase.auth.getSession();
   session = data.session; renderAuth();

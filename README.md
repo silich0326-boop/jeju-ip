@@ -83,3 +83,19 @@ npm run dev                    # http://localhost:5173
 - 사진마다 촬영자와 Pixabay 링크를 표시해요.
 - Pixabay는 이미지를 계속 직접 연결(핫링크)해서 쓰는 것을 권장하지 않아요. 연습용이라 직접 연결하지만, 실제 서비스라면 이미지를 내려받아 직접 호스팅하세요.
 - API 결과는 24시간 캐시해요. (서버 함수의 `Cache-Control`)
+
+## 장바구니 (Supabase 테이블)
+
+로그인한 회원은 상품을 **장바구니**에 담을 수 있어요. 담은 내용은 Supabase의 `cart_items` 테이블에 저장돼요.
+(상품은 `shared/products.js`의 연습용 가상 상품이고, 결제는 없어요.)
+
+### 테이블 만들기 (한 번만)
+
+1. Supabase 대시보드 왼쪽 메뉴의 **SQL Editor** (또는 `</>` 아이콘)를 열고 **New query**
+2. [`supabase/cart.sql`](supabase/cart.sql) 의 내용을 **전부 복사해서 붙여 넣기**
+   - 사이트에서 장바구니(🛒)를 열었을 때 "테이블이 아직 없어요"가 뜨면, 그 화면의 **SQL 복사** 버튼으로도 복사돼요.
+3. **Ctrl + Enter** 로 실행 → "Success. No rows returned" 가 나오면 끝
+4. 왼쪽 **Table Editor** 에서 `cart_items` 가 생겼는지 확인
+
+SQL에는 **RLS(행 수준 보안)** 가 들어 있어서, 로그인한 사용자는 **자기 장바구니만** 읽고 고칠 수 있어요.
+여러 번 실행해도 괜찮아요.
