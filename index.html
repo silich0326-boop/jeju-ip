@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1f3b4d" />
+  <title>제주 로컬 IP</title>
+  <meta name="description" content="오름, 올레길, 감귤, 해녀, 돌하르방… 제주의 로컬 IP를 사진으로 만나요." />
+</head>
+<body>
+  <div id="envWarn" hidden>⚠️ Supabase 환경변수(VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY)가 없어요. README를 확인하세요.</div>
+
+  <header class="site-header">
+    <a class="brand" href="#top">🍊 제주 로컬 IP</a>
+    <nav>
+      <a href="#ip">로컬 IP</a>
+      <a href="#search">사진 검색</a>
+    </nav>
+    <div class="auth-area">
+      <span id="userEmail" hidden></span>
+      <button id="authBtn" class="btn">로그인 / 회원가입</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" id="hero">
+      <div class="hero-text">
+        <p class="eyebrow">JEJU LOCAL IP</p>
+        <h1>제주를 대표하는<br />이야기와 풍경</h1>
+        <p>오름, 올레길, 감귤, 해녀, 돌하르방까지.<br />제주의 로컬 IP를 사진과 함께 만나 보세요.</p>
+        <a class="btn primary" href="#ip">둘러보기</a>
+      </div>
+    </section>
+
+    <section id="ip" class="wrap">
+      <h2>제주 로컬 IP 소개</h2>
+      <div id="cards" class="cards"></div>
+    </section>
+
+    <section id="search" class="wrap">
+      <h2>📷 사진 검색 <small>(회원 전용)</small></h2>
+      <div class="search-box">
+        <form id="searchForm">
+          <input id="q" type="search" placeholder="예: 제주 바다, 오름, 귤" autocomplete="off" required />
+          <button class="btn primary" type="submit">검색</button>
+        </form>
+        <div id="lock" class="lock">
+          <p>🔒 로그인하면 Pixabay 사진을 검색할 수 있어요.</p>
+          <button id="lockBtn" class="btn primary">로그인 / 회원가입</button>
+        </div>
+      </div>
+      <p id="searchMsg" class="msg"></p>
+      <div id="results" class="grid"></div>
+      <button id="more" class="btn" hidden>더 보기</button>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>이미지 제공: <a href="https://pixabay.com" target="_blank" rel="noopener">Pixabay</a> · 사진마다 촬영자 이름을 표시해요.</p>
+    <p>제주 로컬 IP 연습 사이트 · Vite + Supabase + Vercel</p>
+  </footer>
+
+  <dialog id="authDialog">
+    <form id="authForm" novalidate>
+      <button type="button" class="close" id="authClose" aria-label="닫기">✕</button>
+      <div class="tabs">
+        <button type="button" id="tabLogin" class="tab on">로그인</button>
+        <button type="button" id="tabSignup" class="tab">회원가입</button>
+      </div>
+      <label>이메일
+        <input id="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+      </label>
+      <label>비밀번호 <small>(6자 이상)</small>
+        <input id="password" type="password" autocomplete="current-password" minlength="6" required />
+      </label>
+      <label id="pw2Wrap" hidden>비밀번호 확인
+        <input id="password2" type="password" autocomplete="new-password" minlength="6" />
+      </label>
+      <p id="authMsg" class="msg" role="alert"></p>
+      <button id="authSubmit" class="btn primary wide" type="submit">로그인</button>
+    </form>
+  </dialog>
+
+  <dialog id="lightbox">
+    <button type="button" class="close" id="lbClose" aria-label="닫기">✕</button>
+    <img id="lbImg" alt="" />
+    <p id="lbCredit"></p>
+  </dialog>
+
+  <div id="toast" role="status"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
