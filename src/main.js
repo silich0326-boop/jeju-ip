@@ -146,7 +146,8 @@ const KO_ERRORS = [
   [/already registered|already been registered/i, '이미 가입된 이메일이에요. 로그인해 주세요.'],
   [/at least 6|weak/i, '비밀번호는 6자 이상으로 해 주세요.'],
   [/rate limit|too many/i, '요청이 너무 많아요. 잠시 후 다시 시도해 주세요.'],
-  [/invalid.*email|unable to validate email/i, '이메일 형식을 확인해 주세요.']
+  [/invalid.*email|unable to validate email/i, '이메일 형식을 확인해 주세요.'],
+  [/failed to fetch|networkerror|load failed/i, 'Supabase에 연결하지 못했어요. VITE_SUPABASE_URL 주소가 맞는지, 프로젝트가 중지(Paused)되지 않았는지 확인해 주세요.']
 ];
 const koError = m => (KO_ERRORS.find(([re]) => re.test(m)) || [, '문제가 생겼어요: ' + m])[1];
 
